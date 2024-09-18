@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        image: ["swift:5.9", "swift:5.10"]
+        image: ["swift:5.9", "swift:5.10", "swift:6.0"]
     
     container:
       image: ${{ matrix.image }}
@@ -29,7 +29,7 @@ jobs:
     - name: Convert coverage files
       run: |
         llvm-cov export -format="lcov" \
-          .build/debug/dummyPackageTests.xctest \
+          .build/debug/workspacePackageTests.xctest \
           -ignore-filename-regex="\/Tests\/" \
           -ignore-filename-regex="\/Benchmarks\/" \
           -instr-profile .build/debug/codecov/default.profdata > info.lcov
